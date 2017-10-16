@@ -4,10 +4,6 @@
 #include "Engine/World.h"
 
 
-ATank* ATankAIController::GetControlledTank() const { return Cast<ATank>(GetPawn()); }
-
-ATank* ATankAIController::GetPlayerTank() const { return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn()); }
-
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -32,7 +28,9 @@ void ATankAIController::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("AIController not controlling a tank"))
 			return;
 	}
-
-	return;
 }
 
+
+ATank* ATankAIController::GetControlledTank() const { return Cast<ATank>(GetPawn()); }
+
+ATank* ATankAIController::GetPlayerTank() const { return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn()); }
