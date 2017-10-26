@@ -16,7 +16,7 @@ void ATankPlayerController::BeginPlay()
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("PlayerController not controlling a tank"))
+		UE_LOG(LogTemp, Error, TEXT("PlayerController not controlling a tank"));
 		return;
 	}
 }

@@ -25,8 +25,8 @@ void ATankAIController::BeginPlay()
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("AIController not controlling a tank"))
-			return;
+		UE_LOG(LogTemp, Error, TEXT("AIController not controlling a tank"));
+		return;
 	}
 }
 
