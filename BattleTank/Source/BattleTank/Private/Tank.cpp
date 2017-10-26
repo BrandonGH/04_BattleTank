@@ -18,6 +18,11 @@ void ATank::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
 }
 
+void ATank::AimAt(FVector HitLocation)
+{
+	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
@@ -38,5 +43,3 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-
-UTankAimingComponent* ATank::GetAimingComponent() const { return TankAimingComponent; }
