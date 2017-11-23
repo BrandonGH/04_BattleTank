@@ -39,6 +39,8 @@ void ATank::Fire()
 
 	if (Barrel && bIsReloaded)
 	{
+		if (!ProjectileBlueprint) { return; }
+
 		// Spawn a projectile at the socket location on the barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
 
