@@ -6,7 +6,7 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
+class UTankAimingComponent;
 
 /**
  * 
@@ -20,6 +20,9 @@ public:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
+
+protected:
+	UTankAimingComponent * AimingComponent = nullptr;
 
 private:
 	// How close can the AI tank get to the player
