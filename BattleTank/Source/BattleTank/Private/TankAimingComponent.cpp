@@ -27,7 +27,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTimeInSeconds)
+	if (AmmoCount <= 0)
+	{
+		FiringStatus = EFiringStatus::OutOfAmmo;
+	}
+	else if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
 		FiringStatus = EFiringStatus::Reloading;
 	}
@@ -49,7 +53,7 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 
 void UTankAimingComponent::Fire()
 {
-	if (FiringStatus != EFiringStatus::Reloading)
+	if (FiringStatus != EFiringStatus::Reloading && FiringStatus != EFiringStatus::OutOfAmmo)
 	{
 		if (!ensure(ProjectileBlueprint)) { return; }
 		if (!ensure(Barrel)) { return; }
@@ -59,6 +63,7 @@ void UTankAimingComponent::Fire()
 
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = GetWorld()->GetTimeSeconds();
+		AmmoCount--;
 	}
 }
 
@@ -90,6 +95,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 }
 
 EFiringStatus UTankAimingComponent::GetFiringStatus() const { return FiringStatus; }
+
+int32 UTankAimingComponent::GetAmmoCount() const { return AmmoCount; }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {

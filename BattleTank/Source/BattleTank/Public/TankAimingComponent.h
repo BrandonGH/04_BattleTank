@@ -16,7 +16,8 @@ enum class EFiringStatus : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -39,6 +40,9 @@ public:
 	void AimAt(FVector HitLocation);
 
 	EFiringStatus GetFiringStatus() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Status")
+	int32 GetAmmoCount() const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Status")
@@ -65,6 +69,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 5000.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 AmmoCount = 3;
 
 	FVector AimDirection;
 };
