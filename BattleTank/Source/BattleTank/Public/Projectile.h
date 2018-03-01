@@ -8,6 +8,7 @@
 
 class UProjectileMovementComponent;
 class UParticleSystemComponent;
+class URadialForceComponent;
 
 
 UCLASS()
@@ -33,6 +34,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	URadialForceComponent* ExplosionForce = nullptr;
 
 public:	
 	void LaunchProjectile(float Speed);
