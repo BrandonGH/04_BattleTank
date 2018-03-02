@@ -71,7 +71,7 @@ private:
 	float LaunchSpeed = 5000.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int32 AmmoCount = 3;
+	int32 AmmoCount = 20;
 
 	FVector AimDirection;
 };
