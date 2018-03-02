@@ -2,6 +2,7 @@
 
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
+#include "Tank.h" // So we can implement OnDeath
 #include "Engine/World.h"
 
 
@@ -74,4 +75,22 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 
 	OutHitLocation = FVector(0.f);
 	return false; // Line trace didn't succeed
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
+	}
+}
+
+void ATankPlayerController::OnTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("I, AS A PLAYER, HAVE DIED"))
 }

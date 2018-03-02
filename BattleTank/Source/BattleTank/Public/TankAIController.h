@@ -26,6 +26,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float AcceptanceRadius = 8000.f;
 
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
+	
 private:
-	UTankAimingComponent * AimingComponent = nullptr;
+	UTankAimingComponent* AimingComponent = nullptr;
 };

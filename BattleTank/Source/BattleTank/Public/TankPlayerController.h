@@ -25,6 +25,11 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
 
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
+
 	UTankAimingComponent* AimingComponent = nullptr;
 	
 private:
